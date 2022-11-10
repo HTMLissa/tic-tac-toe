@@ -157,15 +157,35 @@ h1 {
 
 .board {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, auto);
   place-items: center;
 }
 
 .cell {
   width: var(--cell-size);
   height: var(--cell-size);
-  background-color: blue;
-  border: 1px solid black;
+  border: 2px solid black;
+}
+
+/* remove outer border */
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+  border-top: none;
+}
+
+.cell:nth-child(3n + 1) {
+  border-left: none;
+}
+
+.cell:nth-child(3n) {
+  border-right: none;
+}
+
+.cell:last-child,
+.cell:nth-child(8),
+.cell:nth-child(7) {
+  border-bottom: none;
 }
 
 .footer {
