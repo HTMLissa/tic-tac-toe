@@ -221,7 +221,7 @@ h1 {
 }
 
 .winning-screen {
-  display: none; 
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -254,8 +254,8 @@ h1 {
   border: 3px solid white;
   background-color: #0004f8;
   color: white;
+}
 
 .footer {
   background-color: yellow;
 }
-
