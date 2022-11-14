@@ -5,9 +5,9 @@ const Player = (name, sign) => {
 
 // function to store the gameboard as an array inside of a Gameboard object
 const gameboard = (function () {
-  let _board = ["X", "O", "X", "X", "", "", "", "", ""];
+  let _board = ["x", "o", "x", "x", "x", "o", "o", "", ""];
   let getGameboard = () => {
-    console.log(_board);
+    return _board;
   };
   return { getGameboard };
 })();
@@ -16,18 +16,31 @@ const gameboard = (function () {
 const gamePlay = (function () {
   // SELECTING BOARD CELLS
   const cells = document.querySelectorAll(".cell");
-  // LOOPING OVER BOARD CELLS & ADDING EVENT LISTENERS TO EACH CELL
+  // CREATING A VARIABLE TO KEEP TRACK OF THE TURNS
+  let switchTurn;
+  // LOOPING OVER BOARD CELLS & ADDING (ONE-TIME) EVENT LISTENERS TO EACH CELL
   cells.forEach((cell) => {
-    cell.addEventListener("click", () => {
-      console.log("you clicked me");
-    });
+    cell.addEventListener("click", makeMove, { once: true });
   });
+  // CREATING FUNCTION TO MAKE A MOVE EACH TIME A CELL IS CLICKED
+  function makeMove(e) {
+    let cell = e.target;
+    let currentPlayer = switchTurn ? true : false;
+    console.log("clicked");
+    // SET MARK
+    // CHECK FOR WIN
+    // CHECK FOR TIE
+    // SWITCH TURNS
+  }
 
   // function to loop over gameboard arr & render the arr content to the webpage
   const displayBoard = () => {
-    let _board = gameBoard.getGameboard();
-    for (let cell of cells) {
-      //
+    let _board = gameboard.getGameboard();
+    for (let i = 0; i <= cells.length; i++) {
+      let cellValue = _board[i];
+      if (cellValue != "") {
+        cells[i].classList.add(cellValue);
+      }
     }
   };
 
