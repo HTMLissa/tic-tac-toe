@@ -5,7 +5,7 @@ const Player = (name, sign) => {
 
 // function to store the gameboard as an array inside of a Gameboard object
 const gameboard = (function () {
-  let _board = ["x", "o", "x", "x", "x", "o", "o", "", ""];
+  let _board = ["", "", "", "", "", "", "", "", ""];
   let getGameboard = () => {
     return _board;
   };
@@ -17,7 +17,7 @@ const gamePlay = (function () {
   // SELECTING BOARD CELLS
   const cells = document.querySelectorAll(".cell");
   // CREATING A VARIABLE TO KEEP TRACK OF THE TURNS
-  let switchTurn;
+  let currentPlayer = "x";
   // LOOPING OVER BOARD CELLS & ADDING (ONE-TIME) EVENT LISTENERS TO EACH CELL
   cells.forEach((cell) => {
     cell.addEventListener("click", makeMove, { once: true });
@@ -25,13 +25,22 @@ const gamePlay = (function () {
   // CREATING FUNCTION TO MAKE A MOVE EACH TIME A CELL IS CLICKED
   function makeMove(e) {
     let cell = e.target;
-    let currentPlayer = switchTurn ? true : false;
-    console.log("clicked");
     // SET MARK
+    cell.classList.add(currentPlayer);
     // CHECK FOR WIN
     // CHECK FOR TIE
     // SWITCH TURNS
+    switchTurns();
   }
+
+  // function to switch turns each time a player sets their mark
+  const switchTurns = () => {
+    if (currentPlayer === "x") {
+      currentPlayer = "o";
+    } else if (currentPlayer === "o") {
+      currentPlayer = "x";
+    }
+  };
 
   // function to loop over gameboard arr & render the arr content to the webpage
   const displayBoard = () => {
