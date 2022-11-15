@@ -16,15 +16,31 @@ const gameboard = (function () {
 const gamePlay = (function () {
   // GETTING THE CURRENT BOARD ARR
   let _board = gameboard.getGameboard();
+
+  // DEFINING WINNING AXES
+  const winningAxes = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [5, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
   // SELECTING BOARD CELLS
   const cells = document.querySelectorAll(".cell");
+
   // CREATING A VARIABLE TO KEEP TRACK OF THE TURNS
   let currentPlayer = "x";
+
   // LOOPING OVER BOARD CELLS & ADDING (ONE-TIME) EVENT LISTENERS TO EACH CELL
   cells.forEach((cell) => {
     cell.addEventListener("click", makeMove, { once: true });
   });
-  // CREATING FUNCTION TO MAKE A MOVE EACH TIME A CELL IS CLICKED
+
+  // function to make a move each time a cell is clicked
   function makeMove(e) {
     let cell = e.target;
     let index = cell.dataset.index;
@@ -33,6 +49,7 @@ const gamePlay = (function () {
     // SET CORRESPONDING BOARD-ARR VALUE;
     _board[index] = currentPlayer;
     // CHECK FOR WIN
+    checkWinner();
     // CHECK FOR TIE
     // SWITCH TURNS
     switchTurns();
@@ -45,6 +62,25 @@ const gamePlay = (function () {
     } else if (currentPlayer === "o") {
       currentPlayer = "x";
     }
+  };
+
+  // function to look for a winner
+  let isWinner = false;
+  let winningScreen = document.querySelector(".winning-screen");
+  let winningMsg = document.querySelector(".winning-message");
+
+  const checkWinner = () => {
+    winningAxes.forEach((item) => {
+      if (
+        _board[item[0]] === currentPlayer &&
+        _board[item[1]] === currentPlayer &&
+        _board[item[2]] === currentPlayer
+      ) {
+        isWinner = true;
+        winningScreen.classList.add("show");
+        winningMsg.textContent = currentPlayer + " wins!";
+      }
+    });
   };
 
   // function to loop over gameboard arr & render the arr content to the webpage

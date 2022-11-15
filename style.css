@@ -162,7 +162,7 @@ h1 {
 }
 
 /* add hover effect to all cells that haven't been marked with an x or o class yet */
-.board.x .cell:not(.x):not(.o):hover::before {
+/* .board.x .cell:not(.x):not(.o):hover::before {
   content: "\0058";
   font-size: var(--mark-size);
   color: lightgray;
@@ -172,7 +172,7 @@ h1 {
   content: "\004F";
   font-size: var(--mark-size);
   color: lightgrey;
-}
+} */
 
 .cell {
   width: var(--cell-size);
