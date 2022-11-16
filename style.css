@@ -141,7 +141,6 @@ body {
 }
 
 .header {
-  background-color: red;
   display: grid;
   place-items: center;
 }
@@ -257,5 +256,4 @@ h1 {
 }
 
 .footer {
-  background-color: yellow;
 }

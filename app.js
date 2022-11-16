@@ -3,7 +3,7 @@ const Player = (name, sign) => {
   return { name, sign };
 };
 
-// function to store the gameboard as an array inside of a Gameboard object
+// function to store the gameboard
 const gameboard = (function () {
   let _board = ["", "", "", "", "", "", "", "", ""];
   let getGameboard = () => {
@@ -92,16 +92,6 @@ const gamePlay = (function () {
     if (isWinner === false && turnCounter >= 9) {
       winningMsg.textContent = "It's a tie!";
       winningScreen.classList.add("show");
-    }
-  };
-
-  // function to loop over gameboard arr & render the arr content to the webpage
-  const displayBoard = () => {
-    for (let i = 0; i <= cells.length; i++) {
-      let cellValue = _board[i];
-      if (cellValue != "") {
-        cells[i].classList.add(cellValue);
-      }
     }
   };
 
