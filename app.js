@@ -105,5 +105,14 @@ const gamePlay = (function () {
     }
   };
 
+  //function to restart the game
+  const restartBtn = document.querySelector(".restart-btn");
+
+  const restartGame = () => {
+    location.reload();
+  };
+
+  restartBtn.addEventListener("click", restartGame);
+
   return { displayBoard };
 })();
