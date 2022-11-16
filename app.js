@@ -51,20 +51,24 @@ const gamePlay = (function () {
     // CHECK FOR WIN
     checkWinner();
     // CHECK FOR TIE
+    checkTie();
     // SWITCH TURNS
     switchTurns();
   }
 
   // function to switch turns each time a player sets their mark
+  let turnCounter = 1;
+
   const switchTurns = () => {
     if (currentPlayer === "x") {
       currentPlayer = "o";
     } else if (currentPlayer === "o") {
       currentPlayer = "x";
     }
+    turnCounter++;
   };
 
-  // function to look for a winner
+  // function to look for a winner & display winner
   let isWinner = false;
   let winningScreen = document.querySelector(".winning-screen");
   let winningMsg = document.querySelector(".winning-message");
@@ -81,6 +85,14 @@ const gamePlay = (function () {
         winningMsg.textContent = currentPlayer + " wins!";
       }
     });
+  };
+
+  // function to check for a tie & display tie-msg
+  const checkTie = () => {
+    if (isWinner === false && turnCounter >= 9) {
+      winningMsg.textContent = "It's a tie!";
+      winningScreen.classList.add("show");
+    }
   };
 
   // function to loop over gameboard arr & render the arr content to the webpage
