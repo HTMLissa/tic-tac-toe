@@ -32,12 +32,29 @@
         <div class="cell" data-index="7"></div>
         <div class="cell" data-index="8"></div>
       </div>
+      <div class="player-form-wrapper">
+        <form action="#" method="post" id="player-form">
+          <div class="player-container">
+            <label for="player1">Player 1 (x) name:</label>
+            <input type="text" name="player1" id="player1" required />
+          </div>
+          <div class="player-container">
+            <label for="player2">Player 2 (o) name:</label>
+            <input type="text" name="player2" id="player2" required />
+          </div>
+          <button type="submit" class="btn" id="lets-play-btn">
+            Let's Play
+          </button>
+        </form>
+      </div>
       <div class="winning-screen">
         <div class="winning-message"></div>
-        <button class="restart-btn">Restart</button>
+        <button class="btn restart-btn">Restart</button>
       </div>
     </main>
-    <footer class="footer"></footer>
+    <footer class="footer">
+      <button class="btn" id="personalize-btn">Personalize Players</button>
+    </footer>
     <!-- JS file -->
     <script src="app.js"></script>
   </body>
