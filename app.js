@@ -25,6 +25,7 @@ const gamePlay = (function () {
     playerFormScreen.classList.add("show");
   };
   personalizeBtn.addEventListener("click", openPlayerForm);
+
   // GETTING PLAYER NAMES FROM FORM
   const startBtn = document.querySelector("#lets-play-btn");
   const personalizePlayers = () => {
@@ -88,12 +89,17 @@ const gamePlay = (function () {
 
   // function to switch turns each time a player sets their mark
   let turnCounter = 1;
+  const boardContainer = document.querySelector(".board");
 
   const switchTurns = () => {
     if (currentPlayer === player1) {
       currentPlayer = player2;
+      boardContainer.classList.remove("player1-turn");
+      boardContainer.classList.add("player2-turn");
     } else if (currentPlayer === player2) {
       currentPlayer = player1;
+      boardContainer.classList.remove("player2-turn");
+      boardContainer.classList.add("player1-turn");
     }
     turnCounter++;
   };
