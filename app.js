@@ -14,6 +14,36 @@ const gameboard = (function () {
 
 // function to store all gameplay relevant functions & variables
 const gamePlay = (function () {
+  // CREATING PLAYERS
+  let player1 = Player("Player 1", "x");
+  let player2 = Player("Player 2", "o");
+
+  // CREATING PLAYERS WHEN PERSONALIZE-BTN IS CLICKED
+  const personalizeBtn = document.querySelector("#personalize-btn");
+  const playerFormScreen = document.querySelector(".player-form-wrapper");
+  const openPlayerForm = () => {
+    playerFormScreen.classList.add("show");
+  };
+  personalizeBtn.addEventListener("click", openPlayerForm);
+  // GETTING PLAYER NAMES FROM FORM
+  const startBtn = document.querySelector("#lets-play-btn");
+  const personalizePlayers = () => {
+    let player1Name = document.querySelector("#player1").value;
+    let player2Name = document.querySelector("#player2").value;
+    if (player1Name != "") {
+      player1.name = player1Name;
+    }
+    if (player2Name != "") {
+      player2.name = player2Name;
+    }
+  };
+
+  startBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    personalizePlayers();
+    playerFormScreen.classList.remove("show");
+  });
+
   // GETTING THE CURRENT BOARD ARR
   let _board = gameboard.getGameboard();
 
@@ -33,7 +63,7 @@ const gamePlay = (function () {
   const cells = document.querySelectorAll(".cell");
 
   // CREATING A VARIABLE TO KEEP TRACK OF THE TURNS
-  let currentPlayer = "x";
+  let currentPlayer = player1;
 
   // LOOPING OVER BOARD CELLS & ADDING (ONE-TIME) EVENT LISTENERS TO EACH CELL
   cells.forEach((cell) => {
@@ -45,9 +75,9 @@ const gamePlay = (function () {
     let cell = e.target;
     let index = cell.dataset.index;
     // SET MARK
-    cell.classList.add(currentPlayer);
+    cell.classList.add(currentPlayer.sign);
     // SET CORRESPONDING BOARD-ARR VALUE;
-    _board[index] = currentPlayer;
+    _board[index] = currentPlayer.sign;
     // CHECK FOR WIN
     checkWinner();
     // CHECK FOR TIE
@@ -60,10 +90,10 @@ const gamePlay = (function () {
   let turnCounter = 1;
 
   const switchTurns = () => {
-    if (currentPlayer === "x") {
-      currentPlayer = "o";
-    } else if (currentPlayer === "o") {
-      currentPlayer = "x";
+    if (currentPlayer === player1) {
+      currentPlayer = player2;
+    } else if (currentPlayer === player2) {
+      currentPlayer = player1;
     }
     turnCounter++;
   };
@@ -76,13 +106,13 @@ const gamePlay = (function () {
   const checkWinner = () => {
     winningAxes.forEach((item) => {
       if (
-        _board[item[0]] === currentPlayer &&
-        _board[item[1]] === currentPlayer &&
-        _board[item[2]] === currentPlayer
+        _board[item[0]] === currentPlayer.sign &&
+        _board[item[1]] === currentPlayer.sign &&
+        _board[item[2]] === currentPlayer.sign
       ) {
         isWinner = true;
         winningScreen.classList.add("show");
-        winningMsg.textContent = currentPlayer + " wins!";
+        winningMsg.textContent = currentPlayer.name + " wins!";
       }
     });
   };
@@ -104,5 +134,5 @@ const gamePlay = (function () {
 
   restartBtn.addEventListener("click", restartGame);
 
-  return { displayBoard };
+  return {};
 })();
